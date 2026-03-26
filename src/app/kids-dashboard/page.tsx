@@ -5,7 +5,7 @@ import Link from 'next/link'
 import { useRouter } from 'next/navigation'
 import { useAuth } from '@/context/auth-context'
 import {
-    Star, ChefHat, Gamepad2, BookOpen, Award, Gift, Smile,
+    ChefHat, Gamepad2, BookOpen, Award,
     Play, Lock, LayoutDashboard, LogOut, Loader2, Bell,
 } from 'lucide-react'
 import { useKidsDashboardData } from '@/hooks/useKidsDashboardData'

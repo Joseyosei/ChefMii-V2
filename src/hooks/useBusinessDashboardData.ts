@@ -37,6 +37,7 @@ export function useBusinessDashboardData() {
             }
 
             // Map database rows to our interface
+            // eslint-disable-next-line @typescript-eslint/no-explicit-any
             const formattedEvents = (eData || []).map((e: any) => ({
                 id: e.id,
                 business_id: e.business_id,

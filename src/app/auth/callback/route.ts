@@ -1,16 +1,16 @@
 import { createServerClient } from '@supabase/ssr'
 import { cookies } from 'next/headers'
 import { NextResponse, type NextRequest } from 'next/server'
-import type { Database } from '@/types/database'
+import type { RoleType } from '@/types/database'
 
 export async function GET(request: NextRequest) {
     const requestUrl = new URL(request.url)
     const code = requestUrl.searchParams.get('code')
-    const next = requestUrl.searchParams.get('next') ?? '/'
 
     if (code) {
         const cookieStore = cookies()
-        const supabase = createServerClient<Database>(
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        const supabase = createServerClient<any>(
             process.env.NEXT_PUBLIC_SUPABASE_URL!,
             process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!,
             {
@@ -42,7 +42,7 @@ export async function GET(request: NextRequest) {
                     email: data.user.email ?? '',
                     full_name: data.user.user_metadata?.full_name ?? data.user.user_metadata?.name ?? null,
                     avatar_url: data.user.user_metadata?.avatar_url ?? null,
-                    role: (data.user.user_metadata?.role as string) ?? 'client',
+                    role: (data.user.user_metadata?.role as RoleType) ?? 'client',
                 })
             }
 

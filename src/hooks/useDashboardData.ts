@@ -45,7 +45,7 @@ export function useDashboardData() {
     const [conversations, setConversations] = useState<Conversation[]>([])
     const [media, setMedia] = useState<ChefMedia[]>([])
     const [loading, setLoading] = useState(true)
-    const [error, setError] = useState<Error | null>(null)
+    const [error] = useState<Error | null>(null)
 
     const fetchAllData = useCallback(async () => {
         if (!user) return
@@ -148,6 +148,7 @@ export function useDashboardData() {
         } finally {
             setLoading(false)
         }
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [user])
 
     useEffect(() => {

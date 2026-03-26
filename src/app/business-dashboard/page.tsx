@@ -7,19 +7,17 @@ import { ChatbotWidget } from '@/components/chatbot/chatbot-widget'
 import {
     LayoutDashboard, Calendar, FileText, Users, GraduationCap,
     Settings, LogOut, TrendingUp, DollarSign, CheckCircle,
-    Clock, Download, Plus, ChevronRight, Bell, Building2, Loader2
+    Download, Plus, ChevronRight, Bell, Building2, Loader2
 } from 'lucide-react'
 import { useBusinessDashboardData, CorporateEvent } from '@/hooks/useBusinessDashboardData'
 
 /* ── Types ─────────────────────────────────────────────── */
 type InvoiceStatus = 'paid' | 'pending' | 'overdue'
-interface Event { id: string; name: string; date: string; chefs: number; guests: number; budget: string; status: 'planned' | 'confirmed' | 'completed' }
 interface Invoice { id: string; ref: string; event: string; date: string; amount: string; status: InvoiceStatus }
 interface TeamMember { id: string; name: string; role: string; dept: string; training: number }
 
 /* ── Mock data ─────────────────────────────────────────── */
 // Temporary placeholders for incomplete sections
-const EVENTS: Event[] = []
 const INVOICES: Invoice[] = [
     { id: '1', ref: 'INV-2026-012', event: 'Q1 Leadership Summit', date: '1 Mar 2026', amount: '£8,400', status: 'pending' },
     { id: '2', ref: 'INV-2026-008', event: 'Annual Company Banquet', date: '15 Jan 2026', amount: '£42,000', status: 'paid' },

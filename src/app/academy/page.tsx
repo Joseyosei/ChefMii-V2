@@ -126,7 +126,7 @@ export default function AcademyPage() {
                                 Join 50,000+ students learning from the world&apos;s best. First lesson is always on us.
                             </p>
                             <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-                                <Button className="bg-white text-primary hover:bg-zinc-100 h-14 px-10 rounded-2xl font-black text-lg">
+                                <Button variant="secondary" className="!bg-white !text-[#171717] hover:!bg-zinc-100 h-14 px-10 rounded-2xl font-black text-lg shadow-lg">
                                     Enrol for Free
                                 </Button>
                                 <Button variant="outline" className="border-white/20 text-white hover:bg-white/10 h-14 px-10 rounded-2xl font-black text-lg backdrop-blur-sm">

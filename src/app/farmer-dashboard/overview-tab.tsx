@@ -1,9 +1,8 @@
 'use client'
 
-import { useState } from 'react'
 import Link from 'next/link'
 import { TrendingUp, Package, ShoppingCart, Star, CheckCircle, Clock, ToggleLeft, ToggleRight, ExternalLink } from 'lucide-react'
-import { fmt, STATUS_STYLE, DEMO_REVENUE, DEMO_PAYOUTS, type FarmerProfile, type FarmerOrder } from './types'
+import { fmt, STATUS_STYLE, DEMO_REVENUE, type FarmerProfile, type FarmerOrder } from './types'
 
 const maxRevenue = Math.max(...DEMO_REVENUE.map(r => r.amount))
 const thisMonth = DEMO_REVENUE[DEMO_REVENUE.length - 1].amount

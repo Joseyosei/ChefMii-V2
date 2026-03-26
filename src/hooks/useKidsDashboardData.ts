@@ -68,12 +68,14 @@ export function useKidsDashboardData() {
             if (pErr && pErr.code !== '42P01') throw pErr
             
             if (pData) {
+                // eslint-disable-next-line @typescript-eslint/no-explicit-any
+                const profileData = pData as any;
                 setProfile({
-                    id: pData.id,
-                    user_id: pData.user_id,
-                    xp: pData.xp || 0,
-                    streak_days: pData.streak_days || 0,
-                    level: Math.floor((pData.xp || 0) / 100) + 1
+                    id: profileData.id,
+                    user_id: profileData.user_id,
+                    xp: profileData.xp || 0,
+                    streak_days: profileData.streak_days || 0,
+                    level: Math.floor((profileData.xp || 0) / 100) + 1
                 })
                 
                 // Fetch lessons logic (if custom tables exist) goes here

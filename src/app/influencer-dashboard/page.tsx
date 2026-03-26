@@ -9,7 +9,7 @@ import {
     Instagram, Youtube, Share2, Star, LogOut,
     LayoutDashboard, Image, Settings, Bell, Loader2, Plus,
 } from 'lucide-react'
-import { useInfluencerDashboardData, InfluencerCollab } from '@/hooks/useInfluencerDashboardData'
+import { useInfluencerDashboardData } from '@/hooks/useInfluencerDashboardData'
 
 // Missing active mock variables - removed COLLABS
 const VIDEOS = [
@@ -239,7 +239,7 @@ export default function InfluencerDashboardPage() {
                                                     <span className="text-xs text-muted-foreground">{review.date}</span>
                                                 </div>
                                             </div>
-                                            <p className="text-sm text-foreground/80 leading-relaxed">"{review.text}"</p>
+                                            <p className="text-sm text-foreground/80 leading-relaxed">&quot;{review.text}&quot;</p>
                                         </div>
                                     ))}
                                 </div>

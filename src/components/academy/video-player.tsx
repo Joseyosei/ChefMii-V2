@@ -1,7 +1,7 @@
 'use client'
 
-import { Play, Pause, RotateCcw, Volume2, Settings, Maximize2, SkipBack, SkipForward } from 'lucide-react'
-import { useState, useRef, useEffect } from 'react'
+import { Play, Pause, Volume2, Settings, Maximize2, SkipBack, SkipForward } from 'lucide-react'
+import { useState } from 'react'
 
 interface VideoPlayerProps {
     src?: string
@@ -10,9 +10,8 @@ interface VideoPlayerProps {
     emoji?: string
 }
 
-export function VideoPlayer({ src, poster, title, emoji }: VideoPlayerProps) {
+export function VideoPlayer({ title, emoji }: VideoPlayerProps) {
     const [isPlaying, setIsPlaying] = useState(false)
-    const [progress, setProgress] = useState(0)
     const [isHovering, setIsHovering] = useState(false)
     
     const togglePlay = () => setIsPlaying(!isPlaying)

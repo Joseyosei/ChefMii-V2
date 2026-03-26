@@ -2,7 +2,7 @@
 
 import { useState } from 'react'
 import { X, Loader2, TrendingUp, TrendingDown } from 'lucide-react'
-import { fmt, STATUS_STYLE, DEMO_REVENUE, DEMO_PAYOUTS, type FarmerOrder, type Payout } from './types'
+import { fmt, STATUS_STYLE, DEMO_REVENUE, DEMO_PAYOUTS, type FarmerOrder } from './types'
 
 const maxRev = Math.max(...DEMO_REVENUE.map(r => r.amount))
 const allTime = DEMO_REVENUE.reduce((s, r) => s + r.amount, 0)
@@ -10,6 +10,7 @@ const thisMonth = DEMO_REVENUE[DEMO_REVENUE.length - 1].amount
 const lastMonth = DEMO_REVENUE[DEMO_REVENUE.length - 2].amount
 const pct = Math.round(((thisMonth - lastMonth) / lastMonth) * 100)
 
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 export function RevenueTab({ orders }: { orders: FarmerOrder[] }) {
     const [payoutOpen, setPayoutOpen] = useState(false)
     const [amount, setAmount] = useState(String(thisMonth))

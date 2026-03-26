@@ -1,12 +1,10 @@
 'use client'
 
-import { Navbar } from '@/components/layout/navbar'
-import { ChatbotWidget } from '@/components/chatbot/chatbot-widget'
 import { Button, Badge } from '@/components/ui'
 import { 
-    Play, CheckCircle2, ChevronLeft, ChevronRight, 
-    Menu, Download, MessageSquare, Star, Settings, Maximize2,
-    Clock, Trophy, Camera, Check, Plus
+    Play, ChevronLeft, ChevronRight, 
+    Menu, Download,
+    Clock, Trophy, Camera, Check
 } from 'lucide-react'
 import { useState } from 'react'
 import Link from 'next/link'

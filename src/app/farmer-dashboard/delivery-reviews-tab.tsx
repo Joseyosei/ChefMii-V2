@@ -1,7 +1,7 @@
 'use client'
 
 import { useState } from 'react'
-import { Truck, CheckCircle, MapPin, Package, Loader2, Star } from 'lucide-react'
+import { Truck, MapPin, Package, Loader2, Star } from 'lucide-react'
 import { type FarmerOrder } from './types'
 
 /* ── Deliveries Tab ─────────────────────────────────────────── */
@@ -187,7 +187,7 @@ export function ReviewsTab() {
                                     ))}
                                     <span className="text-xs text-muted-foreground ml-1">· {r.item}</span>
                                 </div>
-                                <p className="text-sm text-muted-foreground leading-relaxed">"{r.text}"</p>
+                                <p className="text-sm text-muted-foreground leading-relaxed">&quot;{r.text}&quot;</p>
                             </div>
                         </div>
                     </div>

@@ -1,7 +1,6 @@
 'use client'
 
 import Image from 'next/image'
-import Link from 'next/link'
 import { useState } from 'react'
 import { Navbar } from '@/components/layout/navbar'
 import { Footer } from '@/components/layout/footer'
@@ -9,18 +8,169 @@ import { ChatbotWidget } from '@/components/chatbot/chatbot-widget'
 import { ShoppingCart, Star, Search, Heart } from 'lucide-react'
 import { useCartStore } from '@/store/cart-store'
 import { CartDrawer } from '@/components/marketplace/cart-drawer'
+import { ProductDetailModal } from '@/components/marketplace/product-detail-modal'
+
+interface Product {
+    id: string
+    name: string
+    chef: string
+    price: number
+    rating: number
+    reviews: number
+    category: string
+    photo: string
+    badge: string | null
+    description?: string
+    details?: string[]
+}
 
 const CATEGORIES = ['All', 'Oils & Vinegars', 'Spices & Herbs', 'Chocolate', 'Preserved Foods', 'Specialty Salts', 'Tea & Matcha']
 
 const PRODUCTS = [
-    { id: 'p1', name: 'Premium Sicilian Olive Oil', chef: 'Chef Marco Rossi', price: 18.99, rating: 4.9, reviews: 214, category: 'Oils & Vinegars', photo: '/images/marketplace/marketplace_olive_oil.png', badge: 'Best Seller' },
-    { id: 'p2', name: 'Authentic Jollof Spice Blend', chef: 'Chef Aisha Okafor', price: 12.50, rating: 4.8, reviews: 97, category: 'Spices & Herbs', photo: '/images/marketplace/marketplace_jollof_spice.png', badge: 'Chef Pick' },
-    { id: 'p3', name: 'Matcha Ceremonial Grade', chef: 'Chef Yuki Tanaka', price: 29.99, rating: 5.0, reviews: 63, category: 'Tea & Matcha', photo: '/images/marketplace/marketplace_matcha.png', badge: 'Premium' },
-    { id: 'p4', name: 'Black Garlic Fermented Bulbs', chef: 'Chef Pierre Dubois', price: 11.00, rating: 4.7, reviews: 138, category: 'Specialty Salts', photo: '/images/marketplace/marketplace_black_garlic.png', badge: null },
-    { id: 'p5', name: 'Smoked Spanish Sea Salt', chef: 'Chef Sofía Mendez', price: 9.99, rating: 4.8, reviews: 176, category: 'Specialty Salts', photo: '/images/marketplace/marketplace_sea_salt.png', badge: 'Artisan' },
-    { id: 'p6', name: 'Valrhona Dark Chocolate 72%', chef: 'Chef Pierre Dubois', price: 22.00, rating: 4.9, reviews: 89, category: 'Chocolate', photo: '/images/marketplace/marketplace_chocolate.png', badge: 'Limited' },
-    { id: 'p7', name: 'San Marzano DOP Tomatoes', chef: 'Chef Marco Rossi', price: 7.50, rating: 4.8, reviews: 245, category: 'Preserved Foods', photo: '/images/marketplace/marketplace_san_marzano.png', badge: 'Best Seller' },
-    { id: 'p8', name: 'White Truffle Infused Oil', chef: 'Chef Pierre Dubois', price: 44.00, rating: 4.9, reviews: 52, category: 'Oils & Vinegars', photo: '/images/marketplace/marketplace_truffle_oil.png', badge: 'Luxury' },
+    {
+        id: 'p1',
+        name: 'Premium Sicilian Olive Oil',
+        chef: 'Chef Marco Rossi',
+        price: 18.99,
+        rating: 4.9,
+        reviews: 214,
+        category: 'Oils & Vinegars',
+        photo: '/images/marketplace/marketplace_olive_oil.png',
+        badge: 'Best Seller',
+        description: 'Cold-pressed from hand-picked olives in the heart of Sicily. This extra virgin olive oil features a robust, peppery finish with notes of fresh herbs and almond.',
+        details: [
+            '100% Organic Extra Virgin Olive Oil',
+            'Cold-pressed within 24 hours of harvest',
+            'Origin: Sicily, Italy',
+            'Perfect for finishing, salads, and dipping'
+        ]
+    },
+    {
+        id: 'p2',
+        name: 'Authentic Jollof Spice Blend',
+        chef: 'Chef Aisha Okafor',
+        price: 12.50,
+        rating: 4.8,
+        reviews: 97,
+        category: 'Spices & Herbs',
+        photo: '/images/marketplace/marketplace_jollof_spice.png',
+        badge: 'Chef Pick',
+        description: 'A secret blend of aromatic spices including thyme, bay leaves, and scotch bonnet peppers. Developed by Chef Aisha to bring the true taste of West Africa to your kitchen.',
+        details: [
+            'All-natural, no preservatives',
+            'Spiced for medium heat',
+            'Hand-blended in small batches',
+            'Ideal for Jollof rice, stews, and grilled chicken'
+        ]
+    },
+    {
+        id: 'p3',
+        name: 'Matcha Ceremonial Grade',
+        chef: 'Chef Yuki Tanaka',
+        price: 29.99,
+        rating: 5.0,
+        reviews: 63,
+        category: 'Tea & Matcha',
+        photo: '/images/marketplace/marketplace_matcha.png',
+        badge: 'Premium',
+        description: 'Stone-ground from the finest shade-grown tencha leaves in Uji, Japan. Vibrant green color with a smooth, umami-rich flavor and natural sweetness.',
+        details: [
+            '100% Japanese Ceremonial Grade Matcha',
+            'High in antioxidants and L-theanine',
+            'Vibrant emerald green color',
+            'Perfect for traditional tea ceremonies or latte'
+        ]
+    },
+    {
+        id: 'p4',
+        name: 'Black Garlic Fermented Bulbs',
+        chef: 'Chef Pierre Dubois',
+        price: 11.00,
+        rating: 4.7,
+        reviews: 138,
+        category: 'Specialty Salts',
+        photo: '/images/marketplace/marketplace_black_garlic.png',
+        badge: null,
+        description: 'Slow-fermented for 60 days to develop a complex, balsamic-like sweetness and a soft, spreadable texture. Adds an incredible depth of savory umami.',
+        details: [
+            'Naturally fermented without additives',
+            'Rich in S-Allylcysteine',
+            'Peel and use directly',
+            'Great for risottos, sauces, and compound butter'
+        ]
+    },
+    {
+        id: 'p5',
+        name: 'Smoked Spanish Sea Salt',
+        chef: 'Chef Sofía Mendez',
+        price: 9.99,
+        rating: 4.8,
+        reviews: 176,
+        category: 'Specialty Salts',
+        photo: '/images/marketplace/marketplace_sea_salt.png',
+        badge: 'Artisan',
+        description: 'Harvested from the Mediterranean and naturally smoked over holm oak wood. Provides a delicate crunch and a sophisticated smokiness.',
+        details: [
+            'Naturally smoked over wood fire',
+            'Unrefined sea salt from Spain',
+            'Rich in trace minerals',
+            'Excellent for finishing grilled meats and vegetables'
+        ]
+    },
+    {
+        id: 'p6',
+        name: 'Valrhona Dark Chocolate 72%',
+        chef: 'Chef Pierre Dubois',
+        price: 22.00,
+        rating: 4.9,
+        reviews: 89,
+        category: 'Chocolate',
+        photo: '/images/marketplace/marketplace_chocolate.png',
+        badge: 'Limited',
+        description: 'Exceptional dark chocolate with a high cocoa content. Notes of red fruits and toasted nuts with a long, elegant finish.',
+        details: [
+            '72% Cocoa solids',
+            'Sustainably sourced cocoa beans',
+            'The choice of Michelin-starred pastry chefs',
+            'Ideal for ganaches, baking, or pure indulgence'
+        ]
+    },
+    {
+        id: 'p7',
+        name: 'San Marzano DOP Tomatoes',
+        chef: 'Chef Marco Rossi',
+        price: 7.50,
+        rating: 4.8,
+        reviews: 245,
+        category: 'Preserved Foods',
+        photo: '/images/marketplace/marketplace_san_marzano.png',
+        badge: 'Best Seller',
+        description: 'Grown in the volcanic soil of Mount Vesuvius. Prize for their thin skins, meaty flesh, and perfect balance of sweetness and acidity.',
+        details: [
+            'DOP Certified San Marzano Tomatoes',
+            'Grown in Valle del Sarno, Italy',
+            'Hand-picked and peeled',
+            'The essential base for Neapolitan pizza and pasta'
+        ]
+    },
+    {
+        id: 'p8',
+        name: 'White Truffle Infused Oil',
+        chef: 'Chef Pierre Dubois',
+        price: 44.00,
+        rating: 4.9,
+        reviews: 52,
+        category: 'Oils & Vinegars',
+        photo: '/images/marketplace/marketplace_truffle_oil.png',
+        badge: 'Luxury',
+        description: 'Premium olive oil infused with the rare and intensely aromatic essence of Italian white truffles. A luxurious finishing oil.',
+        details: [
+            'Infused with real Tuber Magnatum Pico',
+            'Base of Italian Extra Virgin Olive Oil',
+            'Intense earthy and garlic-like aroma',
+            'Elevates pasta, eggs, and mushrooms'
+        ]
+    },
 ]
 
 const BADGE_COLORS: Record<string, string> = {
@@ -36,6 +186,7 @@ export default function MarketplacePage() {
     const [category, setCategory] = useState('All')
     const [query, setQuery] = useState('')
     const [liked, setLiked] = useState<string[]>([])
+    const [selectedProduct, setSelectedProduct] = useState<Product | null>(null)
 
     // Zustand Cart State
     const { items: cartItems, addItem, removeItem, setIsOpen, getTotalItems } = useCartStore()
@@ -105,7 +256,10 @@ export default function MarketplacePage() {
                             return (
                                 <div key={p.id} className="bg-card rounded-2xl border border-border flex flex-col overflow-hidden group hover:shadow-[0_8px_30px_rgb(0,0,0,0.04)] hover:-translate-y-1 transition-all duration-300">
                                     {/* Product image */}
-                                    <div className="relative h-36 sm:h-44 bg-muted overflow-hidden">
+                                    <div 
+                                        className="relative h-36 sm:h-44 bg-muted overflow-hidden cursor-pointer"
+                                        onClick={() => setSelectedProduct(p)}
+                                    >
                                         <Image src={p.photo} alt={p.name} fill className="object-cover group-hover:scale-105 transition-transform duration-500" />
                                         {/* Badge */}
                                         {p.badge && (
@@ -114,7 +268,7 @@ export default function MarketplacePage() {
                                             </span>
                                         )}
                                         {/* Like button */}
-                                        <button onClick={() => toggleLike(p.id)}
+                                        <button onClick={(e) => { e.stopPropagation(); toggleLike(p.id); }}
                                             className="absolute top-2 right-2 w-8 h-8 rounded-full bg-white/90 backdrop-blur-sm flex items-center justify-center shadow hover:scale-110 transition-transform">
                                             <Heart className={`w-4 h-4 ${isLiked ? 'fill-red-500 text-red-500' : 'text-muted-foreground'}`} />
                                         </button>
@@ -122,7 +276,12 @@ export default function MarketplacePage() {
 
                                     <div className="p-3 sm:p-4 flex flex-col flex-1">
                                         <p className="text-xs text-terracotta font-semibold mb-0.5">{p.chef}</p>
-                                        <h3 className="font-bold text-xs sm:text-sm leading-snug mb-2 flex-1 group-hover:text-terracotta transition-colors">{p.name}</h3>
+                                        <h3 
+                                            className="font-bold text-xs sm:text-sm leading-snug mb-2 flex-1 group-hover:text-terracotta transition-colors cursor-pointer"
+                                            onClick={() => setSelectedProduct(p)}
+                                        >
+                                            {p.name}
+                                        </h3>
                                         <div className="flex items-center gap-1 mb-3">
                                             <Star className="w-3 h-3 text-yellow-400 fill-yellow-400 shrink-0" />
                                             <span className="text-xs font-bold">{p.rating}</span>
@@ -162,6 +321,11 @@ export default function MarketplacePage() {
             </main>
             <Footer />
             <CartDrawer />
+            <ProductDetailModal 
+                product={selectedProduct} 
+                isOpen={!!selectedProduct} 
+                onClose={() => setSelectedProduct(null)} 
+            />
             <ChatbotWidget />
         </>
     )

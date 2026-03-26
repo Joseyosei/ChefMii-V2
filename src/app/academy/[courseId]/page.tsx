@@ -5,7 +5,7 @@ import { Footer } from '@/components/layout/footer'
 import { ChatbotWidget } from '@/components/chatbot/chatbot-widget'
 import { Button, Badge } from '@/components/ui'
 import { 
-    Clock, Users, Star, CheckCircle2, Play, 
+    Users, Star, CheckCircle2, Play, 
     ChevronDown, Lock, Globe, Award, ShieldCheck 
 } from 'lucide-react'
 import { useState } from 'react'

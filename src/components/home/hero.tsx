@@ -2,6 +2,7 @@
 
 import { useState } from 'react'
 import { useRouter } from 'next/navigation'
+import Image from 'next/image'
 import { Search } from 'lucide-react'
 
 const QUICK_TAGS = ['Italian', 'Japanese', 'French', 'London', 'Dubai', 'New York']
@@ -23,10 +24,16 @@ export function Hero() {
     return (
         <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
             {/* Background */}
-            <div
-                className="absolute inset-0 bg-cover bg-center bg-no-repeat"
-                style={{ backgroundImage: `url('https://images.unsplash.com/photo-1577219491135-ce391730fb2c?w=1920&q=80')` }}
-            />
+            <div className="absolute inset-0">
+                <Image
+                    src="https://images.unsplash.com/photo-1577219491135-ce391730fb2c?w=1920&q=80"
+                    alt="Chef cooking in a professional kitchen"
+                    fill
+                    priority
+                    className="object-cover"
+                    quality={80}
+                />
+            </div>
             <div className="absolute inset-0 bg-black/65" />
 
             {/* Content */}

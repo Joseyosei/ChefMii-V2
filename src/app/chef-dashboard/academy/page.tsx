@@ -2,13 +2,12 @@
 
 import { Button, Badge, Input } from '@/components/ui'
 import { 
-    Plus, Search, MoreVertical, Play, Users, 
-    Star, MessageSquare, ArrowUpRight, LayoutGrid,
-    BookOpen, BarChart3, Settings as SettingsIcon,
-    ChevronRight, Calendar
+    Plus, Search, MoreVertical, Users, 
+    Star, LayoutGrid,
+    BookOpen, BarChart3,
+    Calendar
 } from 'lucide-react'
 import { useState } from 'react'
-import Link from 'next/link'
 
 // Mock instructor data
 const myCourses = [

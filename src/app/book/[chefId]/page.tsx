@@ -10,10 +10,11 @@ import { useAuth } from '@/context/auth-context'
 import { CHEF_IMAGES, CHEF_FALLBACKS } from '@/lib/images'
 import {
     Calendar, Users, MapPin, Clock, ChefHat, Loader2, CheckCircle,
-    Star, MessageCircle, X, Send, ShieldCheck, Heart
+    Star, MessageCircle, X, Send, ShieldCheck
 } from 'lucide-react'
 
 // Extended Chef Data Source
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 const CHEFS: Record<string, any> = {
     'marco-rossi': {
         id: 'marco-rossi', name: 'Chef Marco Rossi', cuisine: 'Italian', rate: 150, rating: 4.9, reviews: 128, badge: 'Fine Dining', verified: true,
@@ -94,7 +95,7 @@ const EVENT_TYPES = ['Dinner Party', 'Birthday Celebration', 'Corporate Event', 
 export default function ChefProfileAndBooking() {
     const params = useParams()
     const router = useRouter()
-    const { user, profile } = useAuth()
+    const { user } = useAuth()
     const chefId = typeof params.chefId === 'string' ? params.chefId : ''
     const chef = CHEFS[chefId]
 
@@ -203,7 +204,7 @@ export default function ChefProfileAndBooking() {
                             <h1 className="text-3xl sm:text-5xl font-bold text-white drop-shadow-md flex items-center gap-3">
                                 {chef.name}
                                 {chef.verified && (
-                                    <ShieldCheck className="w-6 h-6 sm:w-8 sm:h-8 text-blue-400 fill-white mt-1" title="Verified Chef" />
+                                    <span title="Verified Chef"><ShieldCheck className="w-6 h-6 sm:w-8 sm:h-8 text-blue-400 fill-white mt-1" /></span>
                                 )}
                             </h1>
                         </div>
@@ -240,7 +241,7 @@ export default function ChefProfileAndBooking() {
                                 <div className="w-24 h-24 bg-green-50 rounded-full flex items-center justify-center mx-auto mb-6">
                                     <CheckCircle className="w-12 h-12 text-green-500" />
                                 </div>
-                                <h2 className="text-3xl font-serif font-bold mb-4">You're booked!</h2>
+                                <h2 className="text-3xl font-serif font-bold mb-4">You&apos;re booked!</h2>
                                 <p className="text-lg text-muted-foreground max-w-md mx-auto mb-8">
                                     {chef.name} has received your booking for {event} on {date}. They will review the details and confirm shortly.
                                 </p>
@@ -337,7 +338,7 @@ export default function ChefProfileAndBooking() {
                                                     </div>
                                                 </div>
                                                 <p className="text-muted-foreground text-sm leading-relaxed">
-                                                    "An absolutely incredible experience. The food was restaurant quality, perfectly timed, and the chef left our kitchen spotless. Highly recommend for any special occasion!"
+                                                    &quot;An absolutely incredible experience. The food was restaurant quality, perfectly timed, and the chef left our kitchen spotless. Highly recommend for any special occasion!&quot;
                                                 </p>
                                             </div>
                                         ))}
