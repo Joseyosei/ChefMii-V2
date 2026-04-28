@@ -69,7 +69,7 @@ export default function PackagesPage() {
                     <div className="relative z-10">
                         <span className="text-xs font-black uppercase tracking-[0.3em] text-white/70 mb-4 block">World-Class Hospitality</span>
                         <h1 className="text-5xl md:text-7xl font-serif font-black mb-6 tracking-tight">Experience Packages</h1>
-                        <p className="text-white/80 text-lg md:text-xl max-w-2xl mx-auto font-medium">Bespoke culinary solutions for elite sports, luxury travel, and life's most precious moments.</p>
+                        <p className="text-white/80 text-lg md:text-xl max-w-2xl mx-auto font-medium">Bespoke culinary solutions for elite sports, luxury travel, and life&apos;s most precious moments.</p>
                     </div>
                 </div>
 

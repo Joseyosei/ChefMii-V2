@@ -1,7 +1,7 @@
 'use client'
 
 import * as Dialog from '@radix-ui/react-dialog'
-import { X, ShoppingCart, Star, Check, ShieldCheck, Globe, Leaf } from 'lucide-react'
+import { X, ShoppingCart, Star, Check, ShieldCheck, Leaf } from 'lucide-react'
 import Image from 'next/image'
 import { useCartStore } from '@/store/cart-store'
 

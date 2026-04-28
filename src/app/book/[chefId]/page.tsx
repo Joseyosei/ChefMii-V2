@@ -116,7 +116,7 @@ export default function ChefProfileAndBooking() {
 
     // Chat state
     const [messages, setMessages] = useState<{ id: number, text: string, sender: 'user' | 'chef' }[]>([
-        { id: 1, text: `Hello! I'm ${chef?.name.split(' ')[1] || 'the chef'}. I'd love to cook for your next event. Let me know if you have any questions!`, sender: 'chef' }
+        { id: 1, text: `Hello! I&apos;m ${chef?.name.split(' ')[1] || 'the chef'}. I&apos;d love to cook for your next event. Let me know if you have any questions!`, sender: 'chef' }
     ])
     const [chatInput, setChatInput] = useState('')
     const [isTyping, setIsTyping] = useState(false)
