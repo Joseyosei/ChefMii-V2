@@ -7,7 +7,7 @@ import { useParams } from 'next/navigation'
 import { Navbar } from '@/components/layout/navbar'
 import { Footer } from '@/components/layout/footer'
 import { ChatbotWidget } from '@/components/chatbot/chatbot-widget'
-import { Star, MapPin, Clock, Users, ChefHat, Heart, Share2, MessageCircle } from 'lucide-react'
+import { Star, MapPin, Clock, Users, ChefHat, Heart, Share2, MessageCircle, ShoppingBag } from 'lucide-react'
 
 // Mock chef data
 interface ChefProfile {
@@ -247,12 +247,21 @@ export default function ChefProfilePage() {
                                     <p className="text-sm text-muted-foreground mb-1">Availability</p>
                                     <p className="font-semibold">{chef.availability}</p>
                                 </div>
-                                <Link
-                                    href={`/book/${chefId}`}
-                                    className="w-full py-3 gradient-brand text-white font-bold rounded-xl text-center hover:opacity-90 transition-opacity block"
-                                >
-                                    Book Now
-                                </Link>
+                                <div className="space-y-3">
+                                    <Link
+                                        href={`/book/${chefId}`}
+                                        className="w-full py-3 gradient-brand text-white font-bold rounded-xl text-center hover:opacity-90 transition-opacity block"
+                                    >
+                                        📅 Book for Event
+                                    </Link>
+                                    <Link
+                                        href={`/order/${chefId}`}
+                                        className="w-full py-3 bg-green-600 text-white font-bold rounded-xl text-center hover:bg-green-700 transition-colors flex items-center justify-center gap-2"
+                                    >
+                                        <ShoppingBag className="w-4 h-4" />
+                                        🍽️ Order Food
+                                    </Link>
+                                </div>
                                 <button className="w-full py-3 border border-border rounded-xl font-semibold hover:bg-muted transition-colors flex items-center justify-center gap-2">
                                     <MessageCircle className="w-4 h-4" />
                                     Message Chef

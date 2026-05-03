@@ -12,6 +12,7 @@ import {
 } from 'lucide-react'
 
 const NAV_LINKS = [
+    { href: '/order', label: '🍽️ Order Food' },
     { href: '/marketplace', label: 'Marketplace' },
     { href: '/pricing', label: 'Pricing' },
     { href: '/packages', label: 'Event Packages' },

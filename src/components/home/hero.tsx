@@ -51,6 +51,16 @@ export function Hero() {
                     From home dinners to presidential banquets, ChefMii connects you with top chefs globally.
                 </p>
 
+                {/* CTA Tabs */}
+                <div className="w-full max-w-2xl mx-auto mb-6 flex gap-2 justify-center">
+                    <button className="px-4 sm:px-6 py-2 bg-white text-black font-bold rounded-full text-xs sm:text-sm hover:bg-white/90 transition-colors">
+                        📅 Book a Chef
+                    </button>
+                    <button className="px-4 sm:px-6 py-2 bg-white/20 border border-white/40 text-white font-bold rounded-full text-xs sm:text-sm hover:bg-white/30 transition-colors">
+                        🍽️ Order Food
+                    </button>
+                </div>
+
                 {/* Search box */}
                 <div className="w-full max-w-2xl mx-auto">
                     <p className="text-white font-bold text-xs sm:text-sm uppercase tracking-wider mb-3">Find a Chef</p>
