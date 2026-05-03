@@ -2,13 +2,13 @@
 
 export const dynamic = 'force-dynamic'
 
-import { useState, useEffect } from 'react'
+import { useState, useEffect, Suspense } from 'react'
 import Link from 'next/link'
 import { useRouter, useSearchParams } from 'next/navigation'
 import { useAuth, dashboardHref } from '@/context/auth-context'
 import { ChefHat, Eye, EyeOff, Loader2 } from 'lucide-react'
 
-export default function LoginPage() {
+function LoginContent() {
     const router = useRouter()
     const params = useSearchParams()
     const { signIn, user, role } = useAuth()
@@ -174,5 +174,17 @@ export default function LoginPage() {
                 </div>
             </div>
         </div>
+    )
+}
+
+export default function LoginPage() {
+    return (
+        <Suspense fallback={
+            <div className="min-h-screen flex items-center justify-center">
+                <Loader2 className="w-8 h-8 text-terracotta animate-spin" />
+            </div>
+        }>
+            <LoginContent />
+        </Suspense>
     )
 }
