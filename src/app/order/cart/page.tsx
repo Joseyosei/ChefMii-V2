@@ -165,7 +165,7 @@ function CartContent() {
                   </button>
                 )}
                 {expandedSpecialRequests.includes(item.id) && (
-                  <p className="mt-2 text-sm text-muted-foreground italic">"{item.specialRequest}"</p>
+                  <p className="mt-2 text-sm text-muted-foreground italic">&quot;{item.specialRequest}&quot;</p>
                 )}
               </div>
             ))}

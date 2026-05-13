@@ -2,14 +2,45 @@
 
 export const dynamic = 'force-dynamic'
 
-import { useState, useEffect, Suspense } from 'react'
+import { useState, Suspense } from 'react'
 import Link from 'next/link'
 import { useParams } from 'next/navigation'
 import { Navbar } from '@/components/layout/navbar'
 import { X, Heart, Share2, Search, ShoppingBag, Plus, Minus } from 'lucide-react'
 
+interface MenuItem {
+  id: string
+  name: string
+  description: string
+  price: number
+  image: string
+  badge?: string
+  likes?: number
+  reviews?: number
+}
+
+interface MenuSection {
+  id: string
+  category: string
+  items: MenuItem[]
+}
+
+interface ChefData {
+  name: string
+  cuisine: string
+  rating: number
+  reviews: number
+  distance: string
+  time: string
+  image: string
+  tagline: string
+  badge: string
+  deliveryFee: string
+  menu: MenuSection[]
+}
+
 // Mock chef data
-const CHEF_DATA: Record<string, any> = {
+const CHEF_DATA: Record<string, ChefData> = {
   '11111111-1111-1111-1111-111111111111': {
     name: 'Marco Rossi',
     cuisine: 'Italian',
@@ -112,7 +143,7 @@ function ChefMenuContent() {
   const chefId = params.chefId as string
   const chef = CHEF_DATA[chefId]
   const [cart, setCart] = useState<CartItem[]>([])
-  const [selectedItem, setSelectedItem] = useState<any>(null)
+  const [selectedItem, setSelectedItem] = useState<MenuItem | null>(null)
   const [quantity, setQuantity] = useState(1)
   const [specialRequest, setSpecialRequest] = useState('')
 
@@ -129,7 +160,7 @@ function ChefMenuContent() {
     )
   }
 
-  const addToCart = (item: any) => {
+  const addToCart = (item: MenuItem) => {
     const existingItem = cart.find(i => i.id === item.id)
     if (existingItem) {
       setCart(cart.map(i =>
@@ -141,14 +172,6 @@ function ChefMenuContent() {
     setSelectedItem(null)
     setQuantity(1)
     setSpecialRequest('')
-  }
-
-  const updateQuantity = (itemId: string, newQty: number) => {
-    if (newQty <= 0) {
-      setCart(cart.filter(i => i.id !== itemId))
-    } else {
-      setCart(cart.map(i => (i.id === itemId ? { ...i, quantity: newQty } : i)))
-    }
   }
 
   const cartTotal = cart.reduce((sum, item) => sum + item.price * item.quantity, 0)

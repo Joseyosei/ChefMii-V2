@@ -167,7 +167,7 @@ function OrderHistoryContent() {
                         <span className="text-sm font-medium">{order.rating} stars</span>
                       </div>
                       {order.review && (
-                        <p className="text-sm text-muted-foreground italic">"{order.review}"</p>
+                        <p className="text-sm text-muted-foreground italic">&quot;{order.review}&quot;</p>
                       )}
                     </div>
                   ) : (
