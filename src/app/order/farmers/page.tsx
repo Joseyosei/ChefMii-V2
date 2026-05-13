@@ -171,7 +171,7 @@ function FarmersContent() {
     },
   ])
 
-  const [selectedFarmer, setSelectedFarmer] = useState<Farmer | null>(farmers[0])
+  const [selectedFarmer] = useState<Farmer | null>(farmers[0])
   const [cart, setCart] = useState<{ productId: string; quantity: number }[]>([])
 
   const addToCart = (productId: string) => {

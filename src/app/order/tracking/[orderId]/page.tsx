@@ -23,10 +23,10 @@ function TrackingContent() {
   const params = useParams()
   const orderId = params.orderId as string
 
-  const [orderStatus, setOrderStatus] = useState('preparing')
-  const [driverLocation, setDriverLocation] = useState({ lat: 51.5074, lng: -0.1278 })
+  const [orderStatus] = useState('preparing')
+  const [, setDriverLocation] = useState({ lat: 51.5074, lng: -0.1278 })
   const [estimatedTime, setEstimatedTime] = useState(12)
-  const [showMap, setShowMap] = useState(true)
+  const [showMap] = useState(true)
 
   // Simulate real-time updates
   useEffect(() => {

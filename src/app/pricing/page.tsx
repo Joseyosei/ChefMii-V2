@@ -4,7 +4,7 @@ import { useState } from 'react'
 import { Navbar } from '@/components/layout/navbar'
 import { Footer } from '@/components/layout/footer'
 import { ChatbotWidget } from '@/components/chatbot/chatbot-widget'
-import { Check, X, HelpCircle, ChevronDown, ChevronUp, Star, Calendar, Package, Leaf, GraduationCap, Video, DollarSign, Zap, CheckCircle } from 'lucide-react'
+import { Check, X, ChevronDown, ChevronUp, Star, Calendar, Package, GraduationCap, Video } from 'lucide-react'
 import Link from 'next/link'
 
 // --- Types & Data ---
@@ -240,7 +240,27 @@ const FAQS = [
 
 // --- Components ---
 
-function PlanCard({ plan }: { plan: any }) {
+interface PlanFeature {
+  text: string
+  included: boolean
+}
+
+interface Plan {
+  name: string
+  badge?: string
+  price: string
+  period: string
+  subtext?: string
+  border: string
+  popular?: boolean
+  features: (string | PlanFeature)[]
+  button: string
+  buttonVariant: string
+  savings?: string
+  smallText?: string
+}
+
+function PlanCard({ plan }: { plan: Plan }) {
   return (
     <div className={`relative flex flex-col bg-card rounded-[12px] border p-6 shadow-sm hover:shadow-md transition-all duration-200 ${plan.border} ${plan.popular ? 'bg-orange-50/30 dark:bg-orange-950/10' : ''}`}>
       {plan.badge && (
@@ -258,7 +278,7 @@ function PlanCard({ plan }: { plan: any }) {
       </div>
 
       <ul className="space-y-3 flex-1 mb-8">
-        {plan.features.map((f: any, i: number) => {
+        {plan.features.map((f: string | PlanFeature, i: number) => {
           const isString = typeof f === 'string'
           const included = isString ? true : f.included
           const text = isString ? f : f.text
@@ -616,7 +636,7 @@ export default function PricingPage() {
                       </tbody>
                     </table>
                   </div>
-                  <p className="mt-4 text-sm font-bold text-purple-600 italic">"10 bookings per month average = £240/month passive income"</p>
+                  <p className="mt-4 text-sm font-bold text-purple-600 italic">&quot;10 bookings per month average = £240/month passive income&quot;</p>
                 </section>
 
                 <section>
@@ -658,7 +678,7 @@ export default function PricingPage() {
         <section className="py-24 px-4 text-center">
           <div className="max-w-2xl mx-auto bg-gradient-to-br from-[#E8520A] to-[#FF5A36] rounded-3xl p-12 text-white shadow-2xl">
             <h2 className="text-3xl sm:text-4xl font-serif font-bold mb-4">Ready to elevate your culinary experience?</h2>
-            <p className="text-white/90 mb-10">Join thousands of food lovers and professionals on the world's premier private chef platform.</p>
+            <p className="text-white/90 mb-10">Join thousands of food lovers and professionals on the world&apos;s premier private chef platform.</p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Link href="/signup" className="px-8 py-4 bg-white text-[#E8520A] font-bold rounded-[999px] hover:bg-white/90 transition-all shadow-lg">
                 Create Account

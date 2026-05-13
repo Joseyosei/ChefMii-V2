@@ -2,11 +2,11 @@
 
 export const dynamic = 'force-dynamic'
 
-import { useState, useEffect, Suspense } from 'react'
+import { useState, Suspense } from 'react'
 import Link from 'next/link'
 import { Navbar } from '@/components/layout/navbar'
 import { Footer } from '@/components/layout/footer'
-import { MapPin, Search, Clock, DollarSign, Star, Zap, CheckCircle, Leaf } from 'lucide-react'
+import { MapPin, Clock, DollarSign, Star, Zap, CheckCircle, Leaf } from 'lucide-react'
 
 const CUISINES = [
   { emoji: '🍝', label: 'Italian', id: 'italian' },
